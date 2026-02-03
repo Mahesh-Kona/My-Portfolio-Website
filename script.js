@@ -261,4 +261,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Fallback: start after a delay if intersection doesn't fire
         setTimeout(() => startTyping(), 1200);
     }
+
+    // --- 10. AUTO-UPDATE FOOTER YEAR ---
+    const yearSpan = document.getElementById('current-year');
+    if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+    }
 });
