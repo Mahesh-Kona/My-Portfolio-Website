@@ -4,32 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Naga Mahesh Kona | Web Developer</title>
-    <meta name="description" content="Portfolio of Naga Mahesh Kona, a creative web developer building things for the web.">
-    
+    <meta name="description" content="Portfolio of Naga Mahesh Kona, a web developer crafting modern, performant web experiences.">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
-    
     <script src="script.js" defer></script>
 </head>
-<body>
+<body id="top">
 
+    <!-- Custom cursor -->
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
+
+    <!-- Scroll progress bar -->
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar"></div>
+    </div>
 
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="nav-logo">NMK</a>
+                <a href="#top" class="nav-logo magnetic-link">
+                    <span class="logo-mark">NMK</span>
+                    <!-- <span class="logo-text">Naga Mahesh <span>Kona</span></span> -->
+                </a>
                 <ul class="nav-links">
+                    <li><a href="#top" class="magnetic-link">Home</a></li>
                     <li><a href="#about" class="magnetic-link">About</a></li>
+                    <li><a href="#skills" class="magnetic-link">Skills</a></li>
+                     <li><a href="#experience" class="magnetic-link">Experience</a></li>
                     <li><a href="#projects" class="magnetic-link">Projects</a></li>
-                    <li><a href="#resume" class="magnetic-link">Resume</a></li>
+                      <li><a href="#education" class="magnetic-link">Education</a></li>
                     <li><a href="#contact" class="magnetic-link">Contact</a></li>
                 </ul>
-                <div class="hamburger">
+                <button class="theme-toggle" aria-label="Toggle color theme">
+                    <span class="theme-icon">☾</span>
+                </button>
+                <div class="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button">
                     <div class="line"></div>
                     <div class="line"></div>
                 </div>
@@ -38,78 +52,201 @@
     </header>
 
     <main>
-        <section class="hero">
+        <!-- HERO -->
+        <section class="hero" aria-labelledby="hero-heading">
+            <div class="hero-bg-gradient"></div>
             <div class="container">
                 <div class="hero-inner hidden">
-                    <img src="images/my_image.jpeg" alt="Naga Mahesh Kona" class="hero-profile">
                     <div class="hero-text">
-                        <h1 class="typewriter-title" data-text="Naga Mahesh Kona"></h1>
-                        
-                        <p class="typewriter-paragraph" data-text="I'm an enthusiastic web developer pursuing third-year year in <b>CSE</b> from <b>IIIT Nuzvid</b>, Andhra Pradesh, India. I am a quick learner with a passion for creating beautiful, functional, and user-centered digital experiences."></p>
-                        <a href="#projects" class="cta-button magnetic-button">View My Work</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+                        <p class="hero-kicker">Web Developer • Problem Solver • Student</p>
+                        <h1 id="hero-heading" class="typewriter-title" data-text="Naga Mahesh Kona"></h1>
+                        <p class="typewriter" data-text="I design and build clean, performant web experiences."></p>
 
-        <section id="about" class="about">
-            <div class="container">
-                <h3 class="section-title hidden">About Me</h3>
-                <div class="about-content">
-                    <div class="about-text hidden">
-                        <p>Hello! I'm Naga Mahesh, a third-year Computer Science student at IIIT Nuzvid. My journey into web development started with a simple "Hello, World!" and has grown into a full-fledged passion for crafting elegant solutions to complex problems.</p>
-                        <p>I thrive on turning ideas into reality with clean, efficient code. I'm skilled in web development, with a strong focus on the mentioned technologies and I believe in understanding the fundamentals before relying on frameworks.</p>
+                        <div class="hero-tags">
+                            <span>Full‑stack fundamentals</span>
+                            <span>Clean, readable code</span>
+                            <span>Deployment & hosting</span>
+                        </div>
+                        <br>
+                        <div class="hero-actions">
+                        <pre>                       </pre>    <a id="download-resume" href="Naga-Mahesh-Kona-resume.pdf" download class="cta-button secondary magnetic-button">Download Resume</a>
+                        </div>
                     </div>
-                    <div class="skills-list hidden">
-                        <h4>My Core Skills:</h4>
-                        <ul>
-                            <li>HTML5, CSS3, JavaScript, jQuery, React(Basics)</li>
-                            <li>C, Python, Flask, PHP, Core Java</li>
-                             <li>Oracle SQL, My SQL, Mongo DB</li>
-                            <li>Miles Web, Git & GitHub</li>
+                    <div class="hero-profile-wrapper">
+                        <div class="hero-card">
+                            <div class="hero-avatar-ring">
+                                <img src="images/my_image.jpeg" alt="Portrait of Naga Mahesh Kona" class="hero-profile">
+                            </div>
+                            <div class="hero-badges">
+                                <div class="hero-badge">
+                                    <span class="badge-label">Open to</span>
+                                    <span class="badge-value">Internships, Roles & Freelancing</span>
+                                </div>
+                                <div class="hero-badge">
+                                    <span class="badge-label">Experience</span>
+                                    <span class="badge-value">5+ months</span>
+                                </div>
+                            </div>
                            
-                        </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="projects">
+        <!-- ABOUT -->
+        <section id="about" class="about" aria-labelledby="about-heading">
             <div class="container">
-                <h3 class="section-title hidden">My Projects</h3>
+                <h2 id="about-heading" class="section-title hidden">About Me</h2>
+                <div class="about-grid">
+                    <div class="about-text hidden">
+                        <p>Hello! I'm <strong>Naga Mahesh</strong>, a Computer Science student at IIIT Nuzvid who enjoys building real-world products more than just solving textbook problems.</p>
+                        <p>Over the last few years, I've moved from learning the basics of programming to building complete, working applications. I work comfortably across the stack with C, Python, PHP, Core Java, JavaScript, and modern web technologies like React.js (basic), Node.js, Bootstrap, CSS, and HTML. I enjoy designing RESTful APIs, structuring databases in MySQL, Microsoft SQL Server, and MongoDB, and deploying applications using platforms such as MilesWeb, Netlify, Vercel, Render, and others.</p>
+                        <p>Right now, I'm actively looking for internships and entry-level opportunities where I can contribute to meaningful products, grow alongside experienced engineers, and keep pushing my skills in full‑stack development.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- SKILLS -->
+        <section id="skills" class="skills" aria-labelledby="skills-heading">
+            <div class="container">
+                <h2 id="skills-heading" class="section-title hidden">Skills</h2>
+                <p class="section-intro hidden">A quick view of the technologies I use across the frontend, backend, and supporting tools.</p>
+                <div class="skills-grid">
+
+                    <article class="skills-card hidden">
+                        <div class="skills-card-header">
+                            <span class="skills-icon" aria-hidden="true">🎨</span>
+                            <div>
+                                <h3>Frontend</h3>
+                                <p>Technologies I use to build clean, responsive interfaces.</p>
+                            </div>
+                        </div>
+                        <div class="skills-list">
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                            <span>jQuery</span>
+                            <span>React.js (Basic)</span>
+                            <span>Bootstrap</span>
+                        </div>
+                    </article>
+
+                    <article class="skills-card hidden">
+                        <div class="skills-card-header">
+                            <span class="skills-icon" aria-hidden="true">⚙️</span>
+                            <div>
+                                <h3>Backend</h3>
+                                <p>Languages and frameworks I use for APIs and logic.</p>
+                            </div>
+                        </div>
+                        <div class="skills-list">
+                            <span>PHP</span>
+                            <span>Python</span>
+                            <span>Flask</span>
+                            <span>Node.js</span>
+                            <span>Core Java</span>
+                            <span>RESTful APIs</span>
+                        </div>
+                    </article>
+
+                    <article class="skills-card hidden">
+                        <div class="skills-card-header">
+                            <span class="skills-icon" aria-hidden="true">🧰</span>
+                            <div>
+                                <h3>Others</h3>
+                                <p>Tools, databases, and platforms I work with.</p>
+                            </div>
+                        </div>
+                        <div class="skills-list">
+                            <span>C</span>
+                            <span>Git &amp; GitHub</span>
+                            <span>MilesWeb</span>
+                            <span>Streamlit</span>
+                            <span>Netlify</span>
+                            <span>Vercel</span>
+                            <span>Clever Cloud</span>
+                            <span>Render</span>
+                            <span>MySQL</span>
+                            <span>Oracle SQL</span>
+                            <span>Microsoft SQL Server</span>
+                            <span>MongoDB</span>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+         <!-- EXPERIENCE -->
+        <section id="experience" class="experience" aria-labelledby="experience-heading">
+            <div class="container">
+                <h2 id="experience-heading" class="section-title hidden">Work Experience</h2>
+                <p class="section-intro hidden">Professional experience closely matching the responsibilities and impact described in my resume.</p>
+                <div class="experience-grid">
+                    <article class="experience-card hidden">
+                        <div class="experience-header">
+                            <div>
+                                <h3>Web Developer Intern</h3>
+                                <p>Edusaint</p>
+                            </div>
+                            <div class="experience-meta">
+                                <p>Oct 2025 &ndash; Present</p>
+                                <p>Brahmapur</p>
+                            </div>
+                        </div>
+                        <ul class="experience-list">
+                            <li>Developed the backend for the Byte Sized Learning App, enabling efficient data processing and application functionality.</li>
+                            <li>Collaborated with the Flutter development team by designing and implementing RESTful APIs for seamless integration between the mobile app and backend services.</li>
+                            <li>Managed application data using MySQL, including database design and query optimization.</li>
+                            <li>Integrated frontend modules provided by the development team with backend services to ensure smooth functionality.</li>
+                            <li>Deployed and maintained the application on MilesWeb cloud, monitoring performance and ensuring system availability.</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+      
+
+       
+        <!-- PROJECTS -->
+        <section id="projects" class="projects" aria-labelledby="projects-heading">
+            <div class="container">
+                <h2 id="projects-heading" class="section-title hidden">Highlighted Projects</h2>
+                <p class="section-intro hidden">A selection of projects that show how I think about product design, data, and real users.</p>
                 <div class="project-grid">
 
-                    <div class="project-card hidden">
+                    <article class="project-card hidden">
                         <div class="project-image">
-                            <img src="images/attendance-management-system.jpeg" onclick="window.open('https://attendance-management-system-lhvn.onrender.com/', '_blank')" alt="Attendance Management System">
+                            <img src="images/attendance-management-system.jpeg" alt="Attendance Management System dashboard screenshot" onclick="window.open('https://attendance-management-system-lhvn.onrender.com/', '_blank')">
+                            <div class="project-pill">End‑to‑end web app</div>
                         </div>
                         <div class="project-info">
-                            <h4>Attendance Management System</h4>
-                            <p>A web-based system to manage and track student attendance efficiently, featuring automated reports and user-friendly dashboards.I am excited to share you that this project is going to be hosted in our campus server very soon.</p>
+                            <h3>Attendance Management System</h3>
+                            <p>A full-featured web application to manage and track student attendance with automated reporting and role-based dashboards. This system is being prepared for deployment on the IIIT Nuzvid campus server.</p>
                             <div class="tech-stack">
                                 <span>PHP</span>
                                 <span>HTML5</span>
                                 <span>CSS3</span>
                                 <span>JavaScript</span>
-                                
                                 <span>MySQL</span>
                             </div>
                             <div class="project-links">
-                                <a href="ams_src-code.html" class="magnetic-link" target="_blank">Live Demo</a>
-                                <a href="ams_src-code.html" class="magnetic-link" target="_self">Source Code</a>
+                                <a href="https://attendance-management-system-lhvn.onrender.com/" class="magnetic-link" target="_blank" rel="noopener">Live Demo</a>
+                          
                             </div>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="project-card hidden" >
+                    <article class="project-card hidden">
                         <div class="project-image">
-                            <img src="images/school-erp.jpeg"  onclick="window.open('https://erp.edusaint.in/', '_blank')   " alt="campus img">
+                            <img src="images/school-erp.jpeg" alt="School ERP platform interface" onclick="window.open('https://erp.edusaint.in/', '_blank')">
+                            <div class="project-pill">Product in use</div>
                         </div>
                         <div class="project-info">
-                            <h4>School ERP System</h4>
-                            <p>It is an integrated software solution that automates and manages all
-academic, administrative, and communication processes of a school on a single
-platform.</p>
+                            <h3>School ERP System</h3>
+                            <p>An integrated ERP solution that centralizes academic, administrative, and communication workflows for schools into a single, easy-to-use platform.</p>
                             <div class="tech-stack">
                                 <span>HTML5</span>
                                 <span>CSS3</span>
@@ -119,22 +256,21 @@ platform.</p>
                                 <span>MySQL</span>
                             </div>
                             <div class="project-links">
-                                <a href="#" class="magnetic-link" target="_blank">Live Demo</a>
-                               
+                                <a href="https://erp.edusaint.in/" class="magnetic-link" target="_blank" rel="noopener">Live Demo</a>
                             </div>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="project-card hidden">
+                    <article class="project-card hidden">
                         <div class="project-image">
-                            <img src="images/learning-app.jpeg" onclick="window.open('https://byte.edusaint.in/', '_blank')" alt="My Calendar">
+                            <img src="images/learning-app.jpeg" alt="Byte Sized Learning App interface" onclick="window.open('https://byte.edusaint.in/', '_blank')">
+                            <div class="project-pill">Learning platform</div>
                         </div>
                         <div class="project-info">
-                            <h4>Byte Sized Learning App</h4>
-                            <p>A digital platform that enables users to access educational content, track learning progress, and study anytime, anywhere
-.</p>
+                            <h3>Byte Sized Learning App</h3>
+                            <p>A digital learning platform that lets students access bite-sized content, track their progress, and learn from anywhere on any device.</p>
                             <div class="tech-stack">
-                              <span>HTML5</span>
+                                <span>HTML5</span>
                                 <span>CSS3</span>
                                 <span>JavaScript</span>
                                 <span>Python</span>
@@ -142,53 +278,95 @@ platform.</p>
                                 <span>MySQL</span>
                             </div>
                             <div class="project-links">
-                                <a href="#" class="magnetic-link" target="_blank">Live Demo</a>
-                               
+                                <a href="https://byte.edusaint.in/" class="magnetic-link" target="_blank" rel="noopener">Live Demo</a>
                             </div>
                         </div>
-                    </div>
+                    </article>
 
-                    </div>
-            </div>
-        </section>
-
-        <section id="resume" class="resume">
-            <div class="container">
-                <h3 class="section-title hidden">Resume</h3>
-                <div class="resume-content hidden">
-                    <div class="resume-frame">
-                        <iframe src="Naga-Mahesh-Kona-resume.pdf" title="Resume" width="100%" height="640" frameborder="0">Your browser does not support iframes. You can download the resume using the button below.</iframe>
-                    </div>
-                    <p id="resume-message">If the resume doesn't display, you can download it here:</p>
-                    <a id="download-resume" href="Naga_Mahesh_Kona_Final_Resume.pdf" download class="contact-email magnetic-button">Download Resume</a>
                 </div>
             </div>
         </section>
-
-        <section id="contact" class="contact">
+  <!-- EDUCATION -->
+        <section id="education" class="education" aria-labelledby="education-heading">
             <div class="container">
-                <h3 class="section-title hidden">Get In Touch</h3>
-                <p class="hidden">I'm currently seeking new opportunities and I'm always open to discussing new projects or creative ideas. Feel free to reach out!</p>
-                <a href="mailto:n210163@rguktn.ac.in" class="contact-email magnetic-button hidden">Say Hello</a>
-                <div class="social-links hidden">
-                    <a href="https://github.com/Mahesh-Kona/" target="_blank" class="social-icon magnetic-link" aria-label="GitHub" title="GitHub">
-                        <!-- GitHub SVG -->
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 .297a12 12 0 00-3.795 23.397c.6.111.82-.261.82-.58 0-.287-.011-1.047-.017-2.054-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.744.083-.729.083-.729 1.205.085 1.84 1.238 1.84 1.238 1.07 1.834 2.809 1.304 3.494.997.108-.775.418-1.304.762-1.604-2.665-.305-5.467-1.333-5.467-5.93 0-1.31.468-2.381 1.235-3.22-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.5 11.5 0 016.003 0c2.292-1.552 3.299-1.23 3.299-1.23.653 1.653.242 2.873.12 3.176.77.839 1.233 1.91 1.233 3.22 0 4.61-2.807 5.624-5.479 5.921.43.372.813 1.102.813 2.222 0 1.604-.015 2.898-.015 3.293 0 .322.218.697.825.579A12 12 0 0012 .297z" fill="currentColor"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.linkedin.com/in/naga-mahesh-kona-575930325/" target="_blank" class="social-icon magnetic-link" aria-label="LinkedIn" title="LinkedIn">
-                        <!-- LinkedIn SVG -->
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.11 1 2.48 1s2.5 1.12 2.5 2.5zM.22 8.98h4.53V24H.22V8.98zM8.98 8.98h4.34v2.04h.06c.6-1.14 2.07-2.35 4.26-2.35 4.56 0 5.4 3 5.4 6.89V24h-4.53v-7.1c0-1.69-.03-3.85-2.35-3.85-2.35 0-2.71 1.83-2.71 3.72V24H8.98V8.98z" fill="currentColor"/>
-                        </svg>
-                    </a>
-                    <a href="https://www.instagram.com/mr.simha69" target="_blank" class="social-icon magnetic-link" aria-label="Instagram" title="Instagram">
-                        <!-- Instagram SVG -->
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.25h8.5A4.25 4.25 0 0020.5 16.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7.25a4.75 4.75 0 110 9.5 4.75 4.75 0 010-9.5zm0 1.5a3.25 3.25 0 100 6.5 3.25 3.25 0 000-6.5zM17.75 6.25a.75.75 0 11-.001 1.5.75.75 0 01.001-1.5z" fill="currentColor"/>
-                        </svg>
-                    </a>
+                <h2 id="education-heading" class="section-title hidden">Education</h2>
+                <p class="section-intro hidden">A quick snapshot of my academic background and current studies.</p>
+                <div class="education-grid">
+
+                    <article class="education-card hidden">
+                        <div class="education-header">
+                            <h3>B.Tech in Computer Science &amp; Engineering</h3>
+                            <p>IIIT Nuzvid</p>
+                            <p class="education-cgpa">CGPA: 9.1 / 10</p>
+                            <div class="education-meta">
+                                <p>Sep 2023 &ndash; Present</p>
+                                <span class="education-status status-in-progress">In progress</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="education-card hidden">
+                        <div class="education-header">
+                            <h3>Class 12</h3>
+                            <p>IIIT Nuzvid</p>
+                            <p class="education-cgpa">CGPA: 9.89 / 10</p>
+                            <div class="education-meta">
+                                <p>Dec 2021 &ndash; Sep 2023</p>
+                                <span class="education-status status-completed">Completed</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="education-card hidden">
+                        <div class="education-header">
+                            <h3>Class 10</h3>
+                            <p>Santiniketan High School, Mydukur</p>
+                            <p class="education-cgpa">CGPA: 10 / 10</p>
+                            <div class="education-meta">
+                                <p>June 2021</p>
+                                <span class="education-status status-completed">Completed</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+        <!-- CONTACT -->
+        <section id="contact" class="contact" aria-labelledby="contact-heading">
+            <div class="container">
+                <h2 id="contact-heading" class="section-title hidden">Let’s Connect</h2>
+                <div class="contact-grid">
+                    <div class="contact-text hidden">
+                        <p>I'm actively looking for opportunities where I can contribute as a web developer and keep learning from a strong engineering team.</p>
+                        <p>If you think I could be a good fit, feel free to reach out. 
+                        <a href="mailto:royalkona4@gmail.com" class="contact-email magnetic-button">Say Hello</a>
+                    </div>
+                    <div class="contact-card hidden">
+                        <h3>Contact Details</h3>
+                        <ul>
+                            <li><span>Email</span><a href="mailto:royalkona4@gmail.com">royalkona4@gmail.com</a></li>
+                            <li><span>Location</span><p>Vijayawada, Andhra Pradesh, India</p></li>
+                            <li><span>Open to</span><p>Remote & on-site internships / roles </p></li>
+                        </ul>
+                        <div class="social-links">
+                            <a href="https://github.com/Mahesh-Kona/" target="_blank" class="social-icon magnetic-link" aria-label="GitHub" title="GitHub">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 .297a12 12 0 00-3.795 23.397c.6.111.82-.261.82-.58 0-.287-.011-1.047-.017-2.054-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.089-.744.083-.729.083-.729 1.205.085 1.84 1.238 1.84 1.238 1.07 1.834 2.809 1.304 3.494.997.108-.775.418-1.304.762-1.604-2.665-.305-5.467-1.333-5.467-5.93 0-1.31.468-2.381 1.235-3.22-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23a11.5 11.5 0 016.003 0c2.292-1.552 3.299-1.23 3.299-1.23.653 1.653.242 2.873.12 3.176.77.839 1.233 1.91 1.233 3.22 0 4.61-2.807 5.624-5.479 5.921.43.372.813 1.102.813 2.222 0 1.604-.015 2.898-.015 3.293 0 .322.218.697.825.579A12 12 0 0012 .297z" fill="currentColor"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/naga-mahesh-kona-575930325/" target="_blank" class="social-icon magnetic-link" aria-label="LinkedIn" title="LinkedIn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.11 1 2.48 1s2.5 1.12 2.5 2.5zM.22 8.98h4.53V24H.22V8.98zM8.98 8.98h4.34v2.04h.06c.6-1.14 2.07-2.35 4.26-2.35 4.56 0 5.4 3 5.4 6.89V24h-4.53v-7.1c0-1.69-.03-3.85-2.35-3.85-2.35 0-2.71 1.83-2.71 3.72V24H8.98V8.98z" fill="currentColor"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.instagram.com/maheshhere94" target="_blank" class="social-icon magnetic-link" aria-label="Instagram" title="Instagram">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.25h8.5A4.25 4.25 0 0020.5 16.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7.25a4.75 4.75 0 110 9.5 4.75 4.75 0 010-9.5zm0 1.5a3.25 3.25 0 100 6.5 3.25 3.25 0 000-6.5zM17.75 6.25a.75.75 0 11-.001 1.5.75.75 0 01.001-1.5z" fill="currentColor"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

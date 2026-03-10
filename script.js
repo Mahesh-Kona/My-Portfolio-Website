@@ -1,53 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. CUSTOM CURSOR LOGIC ---
+    // --- 1. CUSTOM CURSOR LOGIC (SAFE) ---
     const cursorDot = document.querySelector('.cursor-dot');
     const cursorOutline = document.querySelector('.cursor-outline');
 
-    window.addEventListener('mousemove', (e) => {
-        const posX = e.clientX;
-        const posY = e.clientY;
+    if (cursorDot && cursorOutline) {
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
 
-        cursorDot.style.left = `${posX}px`;
-        cursorDot.style.top = `${posY}px`;
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
 
-        cursorOutline.animate({
-            left: `${posX}px`,
-            top: `${posY}px`
-        }, { duration: 500, fill: "forwards" });
-    });
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 450, fill: 'forwards' });
+        });
 
-    // Hide cursor when leaving the window
-    document.addEventListener('mouseleave', () => {
-        cursorDot.classList.add('hidden');
-        cursorOutline.classList.add('hidden');
-    });
-    document.addEventListener('mouseenter', () => {
-        cursorDot.classList.remove('hidden');
-        cursorOutline.classList.remove('hidden');
-    });
+        document.addEventListener('mouseleave', () => {
+            cursorDot.classList.add('hidden');
+            cursorOutline.classList.add('hidden');
+        });
+        document.addEventListener('mouseenter', () => {
+            cursorDot.classList.remove('hidden');
+            cursorOutline.classList.remove('hidden');
+        });
 
-    // Add hover effect to the cursor
-    const interactiveElements = document.querySelectorAll('a, button, .hamburger');
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseover', () => cursorOutline.classList.add('hover'));
-        el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
-    });
+        const interactiveElements = document.querySelectorAll('a, button, .hamburger');
+        interactiveElements.forEach((el) => {
+            el.addEventListener('mouseover', () => cursorOutline.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
+        });
+    }
 
     // --- 2. MAGNETIC LINKS/BUTTONS LOGIC ---
     const magneticElements = document.querySelectorAll('.magnetic-link, .magnetic-button');
 
-    magneticElements.forEach(el => {
-        el.addEventListener('mousemove', function(e) {
+    magneticElements.forEach((el) => {
+        el.addEventListener('mousemove', function (e) {
             const rect = this.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
-            
+
             this.style.transition = 'transform 0.1s linear';
             this.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
         });
 
-        el.addEventListener('mouseleave', function() {
+        el.addEventListener('mouseleave', function () {
             this.style.transition = 'transform 0.3s cubic-bezier(0.78, 0.13, 0.15, 0.86)';
             this.style.transform = 'translate(0, 0)';
         });
@@ -55,61 +55,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. SCROLL-TRIGGERED ANIMATIONS (INTERSECTION OBSERVER) ---
     const hiddenElements = document.querySelectorAll('.hidden');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('show');
-            }
-        });
-    }, {
-        threshold: 0.2 // Trigger when 20% of the element is visible
-    });
+
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        },
+        {
+            threshold: 0.2,
+        }
+    );
 
     hiddenElements.forEach((el) => observer.observe(el));
 
     // --- 4. RESPONSIVE NAVIGATION (HAMBURGER MENU) ---
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('nav-active');
-        hamburger.classList.toggle('toggle');
-    });
-    
-    // Close nav when a link is clicked
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (navLinks.classList.contains('nav-active')) {
-                navLinks.classList.remove('nav-active');
-                hamburger.classList.remove('toggle');
-            }
-        });
-    });
 
-    // --- 5. RESUME FILE CHECK ---
-    // Verify resume.pdf exists; if not, show a friendly message and disable download
-    const resumeUrl = 'Naga_Mahesh_Kona_Final_Resume.pdf';
-    const resumeMessage = document.getElementById('resume-message');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            const isActive = navLinks.classList.toggle('nav-active');
+            hamburger.classList.toggle('toggle', isActive);
+            hamburger.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        });
+
+        navLinks.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', () => {
+                if (navLinks.classList.contains('nav-active')) {
+                    navLinks.classList.remove('nav-active');
+                    hamburger.classList.remove('toggle');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    }
+
+    // --- 5. RESUME FILE CHECK (FOR DOWNLOAD BUTTON) ---
+    const resumeUrl = 'Naga-Mahesh-Kona-resume.pdf';
     const downloadResume = document.getElementById('download-resume');
 
-    if (resumeMessage && downloadResume) {
+    if (downloadResume) {
         fetch(resumeUrl, { method: 'HEAD' })
-            .then(response => {
+            .then((response) => {
                 if (!response.ok) {
-                    resumeMessage.textContent = "Resume file not found in the site folder. Please add 'Naga_Mahesh_Kona_Final_Resume.pdf' to the project to enable preview and download.";
                     downloadResume.style.pointerEvents = 'none';
                     downloadResume.style.opacity = '0.6';
                     downloadResume.removeAttribute('href');
+                } else {
+                    downloadResume.setAttribute('href', resumeUrl);
                 }
             })
             .catch(() => {
-                resumeMessage.textContent = "";
+                // Fail silently in case of offline/blocked requests.
             });
     }
 
     // --- 6. MAILTO / SAY HELLO FALLBACK ---
-    // Ensure the "Say Hello" mailto link works even when no mail client is configured.
     function showToast(message, timeout = 3500) {
         const toast = document.createElement('div');
         toast.textContent = message;
@@ -117,11 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
         toast.style.bottom = '24px';
         toast.style.left = '50%';
         toast.style.transform = 'translateX(-50%)';
-        toast.style.background = 'rgba(20,20,20,0.95)';
+        toast.style.background = 'rgba(15,16,20,0.96)';
         toast.style.color = '#fff';
         toast.style.padding = '10px 16px';
         toast.style.borderRadius = '8px';
-        toast.style.boxShadow = '0 6px 18px rgba(0,0,0,0.4)';
+        toast.style.boxShadow = '0 6px 18px rgba(0,0,0,0.5)';
         toast.style.zIndex = 99999;
         toast.style.fontSize = '14px';
         document.body.appendChild(toast);
@@ -135,34 +139,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const mailtoLink = document.querySelector('a[href^="mailto:"]');
     if (mailtoLink) {
         mailtoLink.addEventListener('click', (e) => {
-            // Try to open default mail client. Also copy email to clipboard as a fallback.
             e.preventDefault();
             const href = mailtoLink.getAttribute('href');
             const email = href.replace(/^mailto:/i, '');
 
-            // Try to open the mail client using location and window.open. Some environments may block it.
             try {
-                // First attempt: change location (works in many browsers)
                 window.location.href = href;
-            } catch (err) {
-                // Ignore and try window.open below
-            }
+            } catch (err) {}
 
             try {
                 window.open(href, '_blank');
-            } catch (err) {
-                // ignore
-            }
+            } catch (err) {}
 
-            // Copy email to clipboard so the user can paste if mail client didn't open
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(email).then(() => {
-                    showToast(`Email copied to clipboard: ${email}`);
-                }).catch(() => {
-                    showToast(`Couldn't copy email automatically. Please use: ${email}`);
-                });
+                navigator.clipboard
+                    .writeText(email)
+                    .then(() => {
+                        showToast(`Email copied to clipboard: ${email}`);
+                    })
+                    .catch(() => {
+                        showToast(`Couldn't copy email automatically. Please use: ${email}`);
+                    });
             } else {
-                // Fallback: use a prompt to allow manual copy
                 try {
                     window.prompt('Copy this email address:', email);
                 } catch (err) {
@@ -185,9 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(typer, speed);
             }
         };
-        // We'll trigger subtitle after title types; start delayed as fallback
-        const startSubtitle = () => setTimeout(typer, 300);
-        // If title already typed or absent, start subtitle quickly
+        const startSubtitle = () => setTimeout(typer, 260);
         window.startSubtitle = startSubtitle;
     }
 
@@ -203,35 +199,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 j++;
                 setTimeout(titleTyper, titleSpeed);
             } else {
-                // After title completes, trigger subtitle and paragraph
                 if (window.startSubtitle) window.startSubtitle();
-                // Also kick paragraph if present (the paragraph observer will start it when visible)
             }
         };
-        // Start title when hero is visible
-        const heroTitleObserver = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) { titleTyper(); heroTitleObserver.disconnect(); } });
-        }, { threshold: 0.2 });
+        const heroTitleObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((e) => {
+                    if (e.isIntersecting) {
+                        titleTyper();
+                        heroTitleObserver.disconnect();
+                    }
+                });
+            },
+            { threshold: 0.2 }
+        );
         heroTitleObserver.observe(titleEl);
-        // Fallback: start after 300ms
-        setTimeout(() => { if (j === 0) titleTyper(); }, 300);
+        setTimeout(() => {
+            if (j === 0) titleTyper();
+        }, 300);
     }
 
-    // Project modal removed — view-details buttons are no longer used
-
-    // --- 9. HTML-AWARE TYPEWRITER FOR HERO PARAGRAPH ---
+    // --- 8. HTML-AWARE TYPEWRITER FOR HERO PARAGRAPH ---
     const typePara = document.querySelector('.typewriter-paragraph');
     if (typePara) {
         const raw = typePara.dataset.text || '';
-        // Helper: types HTML while inserting tags atomically
         const htmlType = (element, source, speed = 20, cb) => {
             let i = 0;
             const insert = () => {
-                if (i >= source.length) { if (cb) cb(); return; }
+                if (i >= source.length) {
+                    if (cb) cb();
+                    return;
+                }
                 if (source[i] === '<') {
-                    // copy until '>' inclusive
                     const end = source.indexOf('>', i);
-                    if (end === -1) { i++; setTimeout(insert, speed); return; }
+                    if (end === -1) {
+                        i++;
+                        setTimeout(insert, speed);
+                        return;
+                    }
                     element.innerHTML += source.slice(i, end + 1);
                     i = end + 1;
                     setTimeout(insert, speed);
@@ -244,27 +249,109 @@ document.addEventListener('DOMContentLoaded', () => {
             insert();
         };
 
-        // Use intersection observer to start when hero visible, else start after 700ms
         let started = false;
         const startTyping = () => {
-            if (started) return; started = true;
-            typePara.innerHTML = ''; // clear
+            if (started) return;
+            started = true;
+            typePara.innerHTML = '';
             htmlType(typePara, raw, 18);
         };
 
-        const paraObserver = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) startTyping();
-            });
-        }, { threshold: 0.2 });
+        const paraObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((e) => {
+                    if (e.isIntersecting) startTyping();
+                });
+            },
+            { threshold: 0.2 }
+        );
         paraObserver.observe(typePara);
-        // Fallback: start after a delay if intersection doesn't fire
         setTimeout(() => startTyping(), 1200);
     }
 
-    // --- 10. AUTO-UPDATE FOOTER YEAR ---
+    // --- 9. AUTO-UPDATE FOOTER YEAR ---
     const yearSpan = document.getElementById('current-year');
     if (yearSpan) {
         yearSpan.textContent = new Date().getFullYear();
+    }
+
+    // --- 10. SCROLL PROGRESS BAR ---
+    const progressBar = document.querySelector('.scroll-progress-bar');
+    if (progressBar) {
+        const updateProgress = () => {
+            const scrollTop = window.scrollY || window.pageYOffset;
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            progressBar.style.width = `${scrolled}%`;
+        };
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        updateProgress();
+    }
+
+    // --- 11. ACTIVE NAV LINK ON SCROLL ---
+    const sections = document.querySelectorAll('main section[id]');
+    const navItems = document.querySelectorAll('.nav-links a[href^="#"]');
+
+    if (sections.length && navItems.length) {
+        const setActiveLink = () => {
+            let currentId = '';
+            const scrollY = window.scrollY + 120;
+
+            sections.forEach((section) => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                if (scrollY >= top && scrollY < top + height) {
+                    currentId = section.getAttribute('id') || '';
+                }
+            });
+
+            navItems.forEach((link) => {
+                const href = link.getAttribute('href') || '';
+                const hash = href.startsWith('#') ? href.substring(1) : '';
+                if (hash && hash === currentId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', setActiveLink, { passive: true });
+        setActiveLink();
+    }
+
+    // --- 12. THEME TOGGLE (DARK/LIGHT) ---
+    const themeToggle = document.querySelector('.theme-toggle');
+    const root = document.documentElement;
+    const themeIcon = themeToggle ? themeToggle.querySelector('.theme-icon') : null;
+
+    const setThemeIcon = (theme) => {
+        if (!themeIcon) return;
+        themeIcon.textContent = theme === 'light' ? '☀' : '☾';
+    };
+
+    const applyTheme = (theme) => {
+        if (theme === 'light') {
+            root.classList.add('light-theme');
+        } else {
+            root.classList.remove('light-theme');
+        }
+        setThemeIcon(theme);
+    };
+
+    let initialTheme = localStorage.getItem('nmk-theme');
+    if (initialTheme !== 'light' && initialTheme !== 'dark') {
+        // default to light if no preference saved
+        initialTheme = 'light';
+    }
+    applyTheme(initialTheme);
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const isLight = !root.classList.contains('light-theme');
+            const newTheme = isLight ? 'light' : 'dark';
+            applyTheme(newTheme);
+            localStorage.setItem('nmk-theme', newTheme);
+        });
     }
 });
