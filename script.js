@@ -93,8 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 5. RESUME FILE CHECK (FOR DOWNLOAD BUTTON) ---
-    const resumeUrl = 'Naga_Mahesh_Kona_Resume.pdf';
+    // --- 5. RESUME FILE CHECK (FOR DOWNLOAD BUTTON) --- 
+    const resumeUrl = 'Naga_Mahesh_Kona_Resume (1).pdf';
     const downloadResume = document.getElementById('download-resume');
 
     if (downloadResume) {
